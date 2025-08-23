@@ -1,0 +1,61 @@
+# =========================
+# Java / Spring Boot
+# =========================
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.log
+*.tmp
+*.out
+*.DS_Store
+*.swp
+*.idea/
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/maven-wrapper.jar
+!**/src/test/**/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# =========================
+# Node / Angular
+# =========================
+node_modules/
+dist/
+tmp/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Angular cache
+.angular/
+.angular/cache/
+
+# =========================
+# IDEs (IntelliJ, WebStorm, VS Code)
+# =========================
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# =========================
+# OS-specific
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment / Config
+# =========================
+.env
+.env.local
