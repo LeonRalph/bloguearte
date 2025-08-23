@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: Blogueate
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_blogueate?serverTimezone=America/Lima&allowPublicKeyRetrieval=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: i202401202
+    hikari:
+      maximum-pool-size: 10         # Número máximo de conexiones en el pool
+      minimum-idle: 5               # Mínimo de conexiones inactivas
+      idle-timeout: 600000          # Tiempo (ms) antes de cerrar una conexión inactiva
+      max-lifetime: 1800000         # Tiempo máximo de vida (ms) de una conexión
+      connection-timeout: 30000     # Tiempo de espera para obtener una conexi+on
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 20                 # Agrupa hasta 20 operaciones en lote (inserciones/actualizaciones)
+        order_inserts: true              # Ordena las inserciones para optimizar el rendimiento del batch
+        order_updates: true              # Ordena las actualizaciones para mejorar el uso del batch
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+security:
+  jwt:
+    secret: QulywYuiMZzR90QVVIuIZs9UmBAbDkQQvBmYHlRJtfmJPcfZoa7Hkzv-P9Tvy10f5NvAASEt1NAyS4ZGoWHAEw
+    access-token-expiration: 900000  # 15 minutos en milisegundos
+    refresh-token-expiration: 900000  # 15 minutos en milisegundos
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.orm.jdbc.bind: TRACE         # Muestra los valores que se envian a los parametros ?
+    org.hibernate.orm.jdbc.extract: TRACE    # Muestra los valores que se extraen desde la BD
+    org.hibernate.type.descriptor.sql: TRACE   # Para ver mas detalles de tipos
+
+server:
+  port: 8080
