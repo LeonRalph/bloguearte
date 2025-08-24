@@ -8,4 +8,5 @@ import lombok.Data;
 public class RolModel {
     private String nombre;
     private String descripcion;
+    private boolean activo;
 }

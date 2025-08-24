@@ -97,6 +97,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.error</groupId>
+            <artifactId>spring-error-handler</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
