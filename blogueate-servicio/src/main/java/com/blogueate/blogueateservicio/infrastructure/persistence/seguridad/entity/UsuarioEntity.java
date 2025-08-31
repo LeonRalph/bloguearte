@@ -3,6 +3,7 @@ package com.blogueate.blogueateservicio.infrastructure.persistence.seguridad.ent
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -31,5 +32,5 @@ public class UsuarioEntity {
     private Boolean activo;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioRolEntity> roles;
+    private Set<UsuarioRolEntity> roles = new HashSet<>();
 }

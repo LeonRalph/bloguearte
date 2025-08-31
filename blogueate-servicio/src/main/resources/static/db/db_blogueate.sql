@@ -68,13 +68,11 @@ CREATE TABLE categorias (
 -- Tabla de publicaciones
 CREATE TABLE publicaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    resumen VARCHAR(100) NOT NULL,
     contenido TEXT NOT NULL,
-    archivo LONGBLOB NULL,
-    nombre_archivo VARCHAR(255),
-    tipo_archivo VARCHAR(100),
-    ruta_archivo VARCHAR(500) NULL,
     fecha_publicacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE,
     usuario_id INT NOT NULL,
     categoria_id INT NOT NULL,
     -- Campos de auditoría
@@ -85,6 +83,28 @@ CREATE TABLE publicaciones (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE
 );
+
+SELECT 
+    p.id,
+    p.titulo,
+    p.contenido,
+    p.fecha_publicacion,
+    u.username AS usuario,
+    c.nombre AS categoria
+FROM publicaciones p
+INNER JOIN usuarios u ON p.usuario_id = u.id
+INNER JOIN categorias c ON p.categoria_id = c.id;
+
+SELECT 
+    p.id,
+    p.titulo,
+    p.contenido,
+    p.fecha_publicacion,
+    u.username AS autor,
+    c.nombre AS categoria
+FROM publicaciones p
+INNER JOIN usuarios u ON p.usuario_id = u.id
+INNER JOIN categorias c ON p.categoria_id = c.id;
 
 -- Tabla de comentarios
 CREATE TABLE comentarios (
@@ -167,6 +187,7 @@ VALUES
 (5, 2, TRUE, 'admin', 'admin'),
 (5, 3, TRUE, 'admin', 'admin');
 
+/*
 INSERT INTO publicaciones (titulo, contenido, nombre_archivo, tipo_archivo, ruta_archivo, usuario_id, categoria_id, usuario_creacion, usuario_actualizacion)
 VALUES
 -- Tecnología (admin)
@@ -203,5 +224,51 @@ VALUES
 ('Los mejores destinos en Europa', 'Ranking de ciudades europeas para visitar en 2025.', 'destinos_europa.jpg', 'image/jpeg', '/uploads/destinos_europa.jpg', 5, 5, 'nrojas', 'nrojas'),
 ('Tips para viajar solo', 'Cómo organizar tu viaje, ahorrar dinero y mantenerte seguro.', 'tips_viajar.jpg', 'image/jpeg', '/uploads/tips_viajar.jpg', 5, 5, 'nrojas', 'nrojas'),
 ('Aplicaciones útiles para viajeros', 'Apps que facilitan la planificación y estadía en el extranjero.', 'apps_viajeros.jpg', 'image/jpeg', '/uploads/apps_viajeros.jpg', 5, 5, 'nrojas', 'nrojas');
+*/
+
+INSERT INTO publicaciones (
+    titulo,
+    resumen,
+    contenido,
+    usuario_id,
+    categoria_id,
+    usuario_creacion,
+    usuario_actualizacion
+)
+VALUES
+-- Tecnología (admin)
+('Introducción a Java Spring Boot', 'Guía básica con Spring Boot', 'Guía básica para crear un servicio REST con Spring Boot y buenas prácticas.', 1, 1, 'admin', 'admin'),
+('Conceptos clave de Angular', 'Componentes y servicios Angular', 'Exploramos los componentes, servicios y módulos en Angular.', 1, 1, 'admin', 'admin'),
+('Cómo desplegar tu app en AWS', 'Despliegue en Amazon Web Services', 'Explicación paso a paso para desplegar aplicaciones en Amazon Web Services.', 1, 1, 'admin', 'admin'),
+('Guía rápida de Docker', 'Imágenes y contenedores Docker', 'Veremos cómo crear imágenes y contenedores para nuestras apps.', 1, 1, 'admin', 'admin'),
+('Patrones de diseño en Backend', 'Patrones de arquitectura modernos', 'Un repaso por los principales patrones usados en arquitecturas modernas.', 1, 1, 'admin', 'admin'),
+
+-- Cocina (jlopez)
+('10 recetas fáciles de pasta', 'Recetas italianas rápidas', 'Recopilación de recetas italianas que puedes hacer en menos de 30 minutos.', 2, 2, 'jlopez', 'jlopez'),
+('Cómo hacer pan casero', 'Pan desde cero en casa', 'Explicación detallada para hacer pan desde cero en casa.', 2, 2, 'jlopez', 'jlopez'),
+('Postres con chocolate', 'Ideas dulces con cacao', 'Ideas dulces para los amantes del cacao.', 2, 2, 'jlopez', 'jlopez'),
+('La ciencia detrás del café', 'Cómo se tuesta y prepara café', 'Un análisis de cómo se tuesta y prepara un buen café.', 2, 2, 'jlopez', 'jlopez'),
+('Recetas vegetarianas rápidas', 'Platos saludables sin carne', 'Platos fáciles, saludables y deliciosos sin carne.', 2, 2, 'jlopez', 'jlopez'),
+
+-- Matemáticas (cgarcia)
+('Introducción a las derivadas', 'Qué son las derivadas', 'Explicación sencilla de qué son y cómo se calculan las derivadas.', 3, 3, 'cgarcia', 'cgarcia'),
+('Álgebra lineal aplicada', 'Casos prácticos de álgebra', 'Casos prácticos de álgebra en programación y gráficos.', 3, 3, 'cgarcia', 'cgarcia'),
+('Ecuaciones diferenciales', 'Ejercicios resueltos paso a paso', 'Ejercicios resueltos paso a paso.', 3, 3, 'cgarcia', 'cgarcia'),
+('Probabilidades en la vida diaria', 'Aplicación de la probabilidad', 'Cómo aplicar la probabilidad para tomar mejores decisiones.', 3, 3, 'cgarcia', 'cgarcia'),
+('Geometría analítica básica', 'Conceptos clave y ejemplos', 'Conceptos clave y ejemplos prácticos.', 3, 3, 'cgarcia', 'cgarcia'),
+
+-- Carpintería (afernandez)
+('Construcción de una mesa rústica', 'Fabricar mesa de madera maciza', 'Tutorial paso a paso para fabricar una mesa de madera maciza.', 4, 4, 'afernandez', 'afernandez'),
+('Herramientas básicas para principiantes', 'Herramientas esenciales carpintería', 'Listado de las principales herramientas y su uso.', 4, 4, 'afernandez', 'afernandez'),
+('Cómo hacer un estante flotante', 'Planos e imágenes de estantes', 'Explicación con imágenes y planos incluidos.', 4, 4, 'afernandez', 'afernandez'),
+('Tratamientos de la madera', 'Barnices y aceites protectores', 'Tipos de barnices y aceites para conservar la madera.', 4, 4, 'afernandez', 'afernandez'),
+('Errores comunes en carpintería', 'Qué evitar al empezar', 'Lo que debes evitar al empezar en este oficio.', 4, 4, 'afernandez', 'afernandez'),
+
+-- Viajes (nrojas)
+('Guía de viaje a Japón', 'Consejos y lugares de Japón', 'Consejos, lugares imprescindibles y costos aproximados.', 5, 5, 'nrojas', 'nrojas'),
+('Mochileando por Sudamérica', 'Recorrido económico por Sudamérica', 'Experiencia personal recorriendo varios países con bajo presupuesto.', 5, 5, 'nrojas', 'nrojas'),
+('Los mejores destinos en Europa', 'Ranking de ciudades europeas', 'Ranking de ciudades europeas para visitar en 2025.', 5, 5, 'nrojas', 'nrojas'),
+('Tips para viajar solo', 'Cómo viajar seguro y barato', 'Cómo organizar tu viaje, ahorrar dinero y mantenerte seguro.', 5, 5, 'nrojas', 'nrojas'),
+('Aplicaciones útiles para viajeros', 'Apps para planificar viajes', 'Apps que facilitan la planificación y estadía en el extranjero.', 5, 5, 'nrojas', 'nrojas');
 
 

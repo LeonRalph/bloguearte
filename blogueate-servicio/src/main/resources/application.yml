@@ -7,10 +7,10 @@ spring:
     username: root
     password: i202401202
     hikari:
-      maximum-pool-size: 10         # Número máximo de conexiones en el pool
-      minimum-idle: 5               # Mínimo de conexiones inactivas
-      idle-timeout: 600000          # Tiempo (ms) antes de cerrar una conexión inactiva
-      max-lifetime: 1800000         # Tiempo máximo de vida (ms) de una conexión
+      maximum-pool-size: 10         # NÃºmero mÃ¡ximo de conexiones en el pool
+      minimum-idle: 5               # MÃ­nimo de conexiones inactivas
+      idle-timeout: 600000          # Tiempo (ms) antes de cerrar una conexiÃ³n inactiva
+      max-lifetime: 1800000         # Tiempo mÃ¡ximo de vida (ms) de una conexiÃ³n
       connection-timeout: 30000     # Tiempo de espera para obtener una conexi+on
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect

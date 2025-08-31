@@ -11,11 +11,10 @@ public class PublicacionModel {
 
     private Long id;
     private String titulo;
+    private String resumen;
     private String contenido;
-    private String nombreArchivo;
-    private String tipoArchivo;
-    private String rutaArchivo;
     private LocalDateTime fechaPublicacion;
+    private Boolean activo;
     private UsuarioModel usuario;
     private CategoriaModel categoria;
 }

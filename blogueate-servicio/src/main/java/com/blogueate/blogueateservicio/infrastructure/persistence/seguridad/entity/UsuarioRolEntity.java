@@ -19,7 +19,7 @@ public class UsuarioRolEntity {
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rol_id", nullable = false)
     private RolEntity rol;
 

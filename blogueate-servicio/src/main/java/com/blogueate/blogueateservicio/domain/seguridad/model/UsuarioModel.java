@@ -11,7 +11,7 @@ public class UsuarioModel {
     private Long id;
     private String username;
     private String email;
-    private String password;
+    private String passwordHash;
     private String nombre;
     private String apellido;
     private boolean activo;
